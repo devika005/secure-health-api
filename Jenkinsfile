@@ -6,12 +6,12 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'docker build -t health-api:local ./app'
+        bat 'docker build -t health-api:local ./app'
       }
     }
     stage('Test') {
       steps {
-        sh 'docker run --rm health-api:local python -m pytest -q'
+        bat 'docker run --rm health-api:local python -m pytest -q'
       }
       post {
         always { junit 'pytest.xml' }
@@ -19,12 +19,12 @@ pipeline {
     }
     stage('Security basics') {
       steps {
-        sh 'echo "Placeholder: validate dependencies (offline)"'
+        bat 'echo "Placeholder: validate dependencies (offline)"'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'docker compose up -d app'
+        bat 'docker compose up -d app'
       }
     }
   }
